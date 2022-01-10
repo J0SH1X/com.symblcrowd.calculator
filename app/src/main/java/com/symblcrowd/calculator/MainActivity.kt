@@ -139,8 +139,8 @@ class MainActivity : AppCompatActivity() {
             //todo parse operatormode and button aka combinedlist[0] then operatorlist[0]
             ParseOperator()
             Log.d("TAG", "CombinedList size is : " + combinedList.size)
-            Log.d("TAG", "Equasion is : " + combinedList[0] + "+" + combinedList[1])
-            DisplayView.text = partsolution.toString()
+            Log.d("TAG", "Equasion is : " + combinedList[0] + operatorList[0] + combinedList[1])
+            DisplayView.text = partsolution.toInt().toString()
 
 
 
@@ -169,7 +169,7 @@ class MainActivity : AppCompatActivity() {
                     p++
                 }
         }
-        combinedList.add(oldcombined.toFloat())
+        combinedList.add(oldcombined.toFloat()) //TODO Fix this so you dont have to press operator button before equals button
         inputList.clear()
         i = 0
         Log.d("TAG", "Combined value is : " + combined)

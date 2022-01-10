@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/praktikum/AndroidStudioProjects/Calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_second.xml",
-        "source": "/Users/praktikum/AndroidStudioProjects/Calculator/app/src/main/res/layout/fragment_second.xml"
+        "merged": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_first.xml",
+        "source": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/src/main/res/layout/fragment_first.xml"
     },
     {
-        "merged": "/Users/praktikum/AndroidStudioProjects/Calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
-        "source": "/Users/praktikum/AndroidStudioProjects/Calculator/app/src/main/res/layout/activity_main.xml"
+        "merged": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/src/main/res/layout/activity_main.xml"
     },
     {
-        "merged": "/Users/praktikum/AndroidStudioProjects/Calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_first.xml",
-        "source": "/Users/praktikum/AndroidStudioProjects/Calculator/app/src/main/res/layout/fragment_first.xml"
+        "merged": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_second.xml",
+        "source": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/src/main/res/layout/fragment_second.xml"
     },
     {
-        "merged": "/Users/praktikum/AndroidStudioProjects/Calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/content_main.xml",
-        "source": "/Users/praktikum/AndroidStudioProjects/Calculator/app/src/main/res/layout/content_main.xml"
+        "merged": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/content_main.xml",
+        "source": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/src/main/res/layout/content_main.xml"
     }
 ]

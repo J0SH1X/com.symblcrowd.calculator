@@ -1,10 +1,10 @@
-com/symblcrowd/calculator/BuildConfig.java
- com.symblcrowd.calculator.BuildConfig
 com/symblcrowd/calculator/databinding/FragmentFirstBinding.java
  com.symblcrowd.calculator.databinding.FragmentFirstBinding
 com/symblcrowd/calculator/databinding/FragmentSecondBinding.java
  com.symblcrowd.calculator.databinding.FragmentSecondBinding
-com/symblcrowd/calculator/databinding/ActivityMainBinding.java
- com.symblcrowd.calculator.databinding.ActivityMainBinding
+com/symblcrowd/calculator/BuildConfig.java
+ com.symblcrowd.calculator.BuildConfig
 com/symblcrowd/calculator/databinding/ContentMainBinding.java
  com.symblcrowd.calculator.databinding.ContentMainBinding
+com/symblcrowd/calculator/databinding/ActivityMainBinding.java
+ com.symblcrowd.calculator.databinding.ActivityMainBinding

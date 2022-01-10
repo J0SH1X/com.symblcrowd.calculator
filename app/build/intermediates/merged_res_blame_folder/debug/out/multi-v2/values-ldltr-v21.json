@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/praktikum/AndroidStudioProjects/Calculator/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "/Users/praktikum/.gradle/caches/transforms-3/936169c150d443c9416017cf85e9eb73/transformed/appcompat-1.2.0/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "source": "/home/j0sh1x/.gradle/caches/transforms-3/936169c150d443c9416017cf85e9eb73/transformed/appcompat-1.2.0/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/praktikum/AndroidStudioProjects/Calculator/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w600dp-v13/values-w600dp-v13.xml",
+            "outputFile": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w600dp-v13/values-w600dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/praktikum/AndroidStudioProjects/Calculator/app/src/main/res/values-w600dp/dimens.xml",
+                    "source": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/src/main/res/values-w600dp/dimens.xml",
                     "from": {
                         "startLines": "1",
                         "startColumns": "4",

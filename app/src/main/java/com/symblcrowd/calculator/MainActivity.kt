@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.symblcrowd.calculator.databinding.ActivityMainBinding
 import android.util.Log
+import android.view.Display
 import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var CommaButton : Button
     private lateinit var BracesButton : Button
     private lateinit var EqualButton : Button
+    private lateinit var clearButton : Button
     private val inputList : ArrayList<Float> = arrayListOf<Float>()
     private val combinedList : ArrayList<Float> = arrayListOf<Float>()
     private val operatorList : MutableList<String> = arrayListOf<String>()
@@ -78,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         CommaButton = findViewById<Button>(R.id.CommaButton)
         BracesButton = findViewById<Button>(R.id.BracesButton)
         EqualButton = findViewById<Button>(R.id.EqualButton)
+        clearButton = findViewById<Button>(R.id.clearButton)
 
 
 
@@ -134,6 +137,12 @@ class MainActivity : AppCompatActivity() {
         BracesButton.setOnClickListener {
             operatorList.add("()")
         }
+        clearButton.setOnClickListener {
+            inputList.clear()
+            combinedList.clear()
+            operatorList.clear()
+            DisplayView.text = ""
+        }
 
         EqualButton.setOnClickListener {
             //todo parse operatormode and button aka combinedlist[0] then operatorlist[0]
@@ -176,6 +185,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun ParseOperator() {
+        //TODO add proper logik to use more then 2 numbers
         operatorIndex = 0
         numberIndex = 0
         if (operatorList[operatorIndex] == "+") {
@@ -193,7 +203,7 @@ class MainActivity : AppCompatActivity() {
 
 
         if (operatorList[operatorIndex] == "/") {
-            partsolution = inputList[numberIndex] / inputList[numberIndex+1]
+            partsolution = combinedList[numberIndex] / combinedList[numberIndex+1]
         }
 
 }

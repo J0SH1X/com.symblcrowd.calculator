@@ -83,6 +83,9 @@ public final class ActivityMainBinding implements ViewBinding {
   public final AppBarLayout appBarLayout;
 
   @NonNull
+  public final Button clearButton;
+
+  @NonNull
   public final Toolbar toolbar;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button BracesButton,
@@ -92,7 +95,7 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull Button NineButton, @NonNull Button OneButton, @NonNull Button PlusButton,
       @NonNull Button SevenButton, @NonNull Button SixButton, @NonNull Button ThreeButton,
       @NonNull Button TwoButton, @NonNull ConstraintLayout WasIstDas, @NonNull Button ZeroButton,
-      @NonNull AppBarLayout appBarLayout, @NonNull Toolbar toolbar) {
+      @NonNull AppBarLayout appBarLayout, @NonNull Button clearButton, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.BracesButton = BracesButton;
     this.CommaButton = CommaButton;
@@ -114,6 +117,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.WasIstDas = WasIstDas;
     this.ZeroButton = ZeroButton;
     this.appBarLayout = appBarLayout;
+    this.clearButton = clearButton;
     this.toolbar = toolbar;
   }
 
@@ -260,6 +264,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.clearButton;
+      Button clearButton = ViewBindings.findChildViewById(rootView, id);
+      if (clearButton == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
@@ -269,7 +279,7 @@ public final class ActivityMainBinding implements ViewBinding {
       return new ActivityMainBinding((ConstraintLayout) rootView, BracesButton, CommaButton,
           DisplayView, DivideButton, EightButton, EqualButton, FiveButton, FourButton, MinusButton,
           MultiplyButton, NineButton, OneButton, PlusButton, SevenButton, SixButton, ThreeButton,
-          TwoButton, WasIstDas, ZeroButton, appBarLayout, toolbar);
+          TwoButton, WasIstDas, ZeroButton, appBarLayout, clearButton, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

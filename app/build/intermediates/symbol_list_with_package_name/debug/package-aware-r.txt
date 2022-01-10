@@ -1853,6 +1853,7 @@ id chip3
 id chip_group
 id chronometer
 id circle_center
+id clearButton
 id clear_text
 id clip_horizontal
 id clip_vertical

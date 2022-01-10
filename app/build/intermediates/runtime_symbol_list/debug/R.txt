@@ -1852,6 +1852,7 @@ int id chip3 0x7f08007f
 int id chip_group 0x7f080080
 int id chronometer 0x7f080081
 int id circle_center 0x7f080082
+int id clearButton 0x7f0801bf
 int id clear_text 0x7f080083
 int id clip_horizontal 0x7f080084
 int id clip_vertical 0x7f080085

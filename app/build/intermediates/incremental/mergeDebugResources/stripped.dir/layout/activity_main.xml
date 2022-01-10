@@ -7,20 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Calculator.AppBarOverlay">
+        android:layout_marginBottom="669dp"
+        android:theme="@style/Theme.Calculator.AppBarOverlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="413dp"
+            android:layout_height="62dp"
             android:background="?attr/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/Theme.Calculator.PopupOverlay" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/DisplayView"
@@ -71,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="214dp"
         android:layout_marginTop="660dp"
-        android:layout_marginEnd="103dp"
+        android:layout_marginEnd="101dp"
         android:layout_marginBottom="20dp"
         android:text="="
         app:layout_constraintBottom_toBottomOf="parent"
@@ -139,7 +148,7 @@
         android:id="@+id/OneButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="607dp"
         android:layout_marginEnd="309dp"
         android:layout_marginBottom="75dp"
@@ -169,7 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="216dp"
         android:layout_marginTop="606dp"
-        android:layout_marginEnd="107dp"
+        android:layout_marginEnd="101dp"
         android:layout_marginBottom="75dp"
         android:text="3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -181,7 +190,7 @@
         android:id="@+id/FourButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="548dp"
         android:layout_marginEnd="306dp"
         android:layout_marginBottom="130dp"
@@ -223,21 +232,29 @@
         android:id="@+id/SevenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="494dp"
+        android:layout_marginEnd="305dp"
+        android:layout_marginBottom="189dp"
         android:text="7"
-        app:layout_constraintBottom_toTopOf="@+id/FourButton"
-        app:layout_constraintEnd_toStartOf="@+id/EightButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BracesButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/EightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="494dp"
+        android:layout_marginEnd="201dp"
+        android:layout_marginBottom="189dp"
         android:text="8"
-        app:layout_constraintBottom_toTopOf="@+id/FiveButton"
-        app:layout_constraintEnd_toStartOf="@+id/NineButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/NineButton"
@@ -245,7 +262,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="216dp"
         android:layout_marginTop="494dp"
-        android:layout_marginEnd="107dp"
+        android:layout_marginEnd="101dp"
         android:layout_marginBottom="189dp"
         android:text="9"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -257,10 +274,10 @@
         android:id="@+id/BracesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="18dp"
         android:layout_marginTop="434dp"
         android:layout_marginEnd="306dp"
-        android:layout_marginBottom="249dp"
+        android:layout_marginBottom="241dp"
         android:text="()"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -274,7 +291,7 @@
         android:layout_marginStart="117dp"
         android:layout_marginTop="435dp"
         android:layout_marginEnd="200dp"
-        android:layout_marginBottom="248dp"
+        android:layout_marginBottom="241dp"
         android:text="C"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

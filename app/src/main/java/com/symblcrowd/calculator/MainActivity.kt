@@ -162,7 +162,10 @@ class MainActivity : AppCompatActivity() {
 
 
     fun CombineNumbers() {
-        while (i < inputList.size-1) {
+        if (inputList.size == 1) {
+        oldcombined = inputList[0].toString()
+        }else {
+            while (i < inputList.size - 1) {
                 if (i == 0) {
                     combined =
                         inputList[numberIndex].toInt()
@@ -176,15 +179,15 @@ class MainActivity : AppCompatActivity() {
                     combined = oldcombined + inputList[numberIndex + p].toInt().toString()
                     oldcombined = combined
                     i++
-                    if (p < inputList.size-1) {
+                    if (p < inputList.size - 1) {
                         p++
                     }
                 }
+            }
         }
         PullToCombinedList()
         inputList.clear()
         i = 0
-        Log.d("TAG", "Combined value is : " + combined)
     }
 
     fun ParseOperator() {

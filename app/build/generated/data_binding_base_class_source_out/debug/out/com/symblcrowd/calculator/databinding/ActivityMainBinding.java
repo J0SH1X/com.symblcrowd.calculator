@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
-import com.google.android.material.appbar.AppBarLayout;
 import com.symblcrowd.calculator.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -80,7 +79,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final Button ZeroButton;
 
   @NonNull
-  public final AppBarLayout appBarLayout;
+  public final ConstraintLayout appBarLayout;
 
   @NonNull
   public final Button clearButton;
@@ -95,7 +94,8 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull Button NineButton, @NonNull Button OneButton, @NonNull Button PlusButton,
       @NonNull Button SevenButton, @NonNull Button SixButton, @NonNull Button ThreeButton,
       @NonNull Button TwoButton, @NonNull ConstraintLayout WasIstDas, @NonNull Button ZeroButton,
-      @NonNull AppBarLayout appBarLayout, @NonNull Button clearButton, @NonNull Toolbar toolbar) {
+      @NonNull ConstraintLayout appBarLayout, @NonNull Button clearButton,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.BracesButton = BracesButton;
     this.CommaButton = CommaButton;
@@ -259,7 +259,7 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       id = R.id.appBarLayout;
-      AppBarLayout appBarLayout = ViewBindings.findChildViewById(rootView, id);
+      ConstraintLayout appBarLayout = ViewBindings.findChildViewById(rootView, id);
       if (appBarLayout == null) {
         break missingId;
       }

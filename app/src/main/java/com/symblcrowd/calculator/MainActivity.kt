@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var oldcombined : String
     private var input : Int = 0
     private var p : Int = 2
+    private var partsolution : Float = 0F
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,13 +136,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         EqualButton.setOnClickListener {
-
             //todo parse operatormode and button aka combinedlist[0] then operatorlist[0]
             ParseOperator()
+            Log.d("TAG", "CombinedList size is : " + combinedList.size)
+            Log.d("TAG", "Equasion is : " + combinedList[0] + "+" + combinedList[1])
+            DisplayView.text = partsolution.toString()
 
-            while ( i < combinedList.size-1 && i < operatorList.size-1) {
-                combinedList[numberIndex]
-            }
 
 
 
@@ -169,25 +169,31 @@ class MainActivity : AppCompatActivity() {
                     p++
                 }
         }
+        combinedList.add(oldcombined.toFloat())
         inputList.clear()
         i = 0
         Log.d("TAG", "Combined value is : " + combined)
     }
 
     fun ParseOperator() {
+        operatorIndex = 0
+        numberIndex = 0
         if (operatorList[operatorIndex] == "+") {
-            
+            partsolution = combinedList[numberIndex] + combinedList[numberIndex+1]
         }
 
         if (operatorList[operatorIndex] == "-") {
+            partsolution = combinedList[numberIndex] - combinedList[numberIndex+1]
         }
 
 
         if (operatorList[operatorIndex] == "*") {
+            partsolution = combinedList[numberIndex] * combinedList[numberIndex+1]
         }
 
 
         if (operatorList[operatorIndex] == "/") {
+            partsolution = inputList[numberIndex] / inputList[numberIndex+1]
         }
 
 }

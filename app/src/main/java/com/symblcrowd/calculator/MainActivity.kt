@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private val combinedList : ArrayList<Float> = arrayListOf<Float>()
     private val operatorList : MutableList<String> = arrayListOf<String>()
     private val solveList : MutableList<Float> = arrayListOf<Float>()
+    private val displayList : MutableList<String> = arrayListOf<String>()
     private var numberIndex : Int = 0
     private var operatorIndex: Int = 0
     private var i : Int = 0
@@ -193,6 +194,7 @@ class MainActivity : AppCompatActivity() {
         }
         PullToCombinedList()
         inputList.clear()
+        displayList.add(oldcombined)
     }
 
     fun ParseOperator() {
@@ -264,6 +266,15 @@ class MainActivity : AppCompatActivity() {
 }
     fun PullToCombinedList(){
         combinedList.add(oldcombined.toFloat())
+    }
+
+    fun displayEquation (){
+        c=0
+       // DisplayView.text = displayList[0]
+       while (i < displayList.size-1){
+           Log.d("TAG", "Value " + c +"is" + displayList[c])
+           c++
+       }
     }
 
 }

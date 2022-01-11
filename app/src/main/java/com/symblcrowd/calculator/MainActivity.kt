@@ -18,7 +18,6 @@ import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var DisplayView : TextView
     private lateinit var TwoButton : Button
@@ -42,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private val inputList : ArrayList<Float> = arrayListOf<Float>()
     private val combinedList : ArrayList<Float> = arrayListOf<Float>()
     private val operatorList : MutableList<String> = arrayListOf<String>()
+    private val solveList : MutableList<Float> = arrayListOf<Float>()
     private var numberIndex : Int = 0
     private var operatorIndex: Int = 0
     private var i : Int = 0
@@ -51,7 +51,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var oldcombined : String
     private var input : Int = 0
     private var p : Int = 2
-    private var partsolution : Float = 0F
+    private var c : Int = 0
+    private var modifier : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +117,6 @@ class MainActivity : AppCompatActivity() {
         }
         PlusButton.setOnClickListener {
             operatorList.add("+")
-            Log.d("TAG", "SIZE OF InputArray ARRAY : " + inputList.size)
                 CombineNumbers()
         }
         MinusButton.setOnClickListener {
@@ -141,6 +141,7 @@ class MainActivity : AppCompatActivity() {
             inputList.clear()
             combinedList.clear()
             operatorList.clear()
+            solveList.clear()
             DisplayView.text = ""
         }
 
@@ -150,7 +151,12 @@ class MainActivity : AppCompatActivity() {
             ParseOperator()
             Log.d("TAG", "CombinedList size is : " + combinedList.size)
             Log.d("TAG", "Equasion is : " + combinedList[0] + operatorList[0] + combinedList[1])
-            DisplayView.text = partsolution.toInt().toString()
+            DisplayView.text = solveList[0].toInt().toString()
+            inputList.clear()
+            combinedList.clear()
+            operatorList.clear()
+            solveList.clear()
+
 
 
 
@@ -162,6 +168,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun CombineNumbers() {
+        i = 0
         if (inputList.size == 1) {
         oldcombined = inputList[0].toString()
         }else {
@@ -175,7 +182,6 @@ class MainActivity : AppCompatActivity() {
                     i++
 
                 } else {
-                    Log.d("TAG", "P counter is : " + p)
                     combined = oldcombined + inputList[numberIndex + p].toInt().toString()
                     oldcombined = combined
                     i++
@@ -187,31 +193,74 @@ class MainActivity : AppCompatActivity() {
         }
         PullToCombinedList()
         inputList.clear()
-        i = 0
     }
 
     fun ParseOperator() {
-        //TODO add proper logik to use more then 2 numbers
+
+
         operatorIndex = 0
         numberIndex = 0
-        if (operatorList[operatorIndex] == "+") {
-            partsolution = combinedList[numberIndex] + combinedList[numberIndex+1]
+        i = 0
+        p = 1
+        c = 0
+        while (i < combinedList.size-1){
+            when {
+                operatorList[operatorIndex] == "+" -> {
+                    if (i == 0) {
+                        solveList.add(combinedList[numberIndex + c] + combinedList[numberIndex + p])
+                    }else {
+                            solveList.set(
+                                0,
+                                (solveList[0] + combinedList[numberIndex + c + 1])
+                            )
+                    }
+                }
+                operatorList[operatorIndex] == "-" -> {
+                    if (i == 0) {
+                        solveList.add(combinedList[numberIndex + c] - combinedList[numberIndex + p])
+                    }else {
+                        solveList.set(
+                            0,
+                            (solveList[0] - combinedList[numberIndex + c + 1])
+                        )
+
+                    }
+
+                }
+                operatorList[operatorIndex] == "*" -> {
+                    if (i == 0) {
+                        solveList.add(combinedList[numberIndex + c] * combinedList[numberIndex + p])
+                    }else {
+                        solveList.set(
+                            0,
+                            (solveList[0] * combinedList[numberIndex + c + 1])
+                        )
+
+                    }
+                }
+                operatorList[operatorIndex] == "/" -> {
+                    if (i == 0) {
+                        solveList.add(combinedList[numberIndex + c] / combinedList[numberIndex + p])
+                    }else {
+                        solveList.set(
+                            0,
+                            (solveList[0] / combinedList[numberIndex + c + 1])
+                        )
+
+                    }
+                }
+            }
+            if (p < combinedList.size-1) {
+                p++
+            }
+                i++
+            if ( operatorIndex < operatorList.size-1) {
+                operatorIndex++
+            }
+            if (c < combinedList.size-1) {
+                c++
+            }
         }
-
-        if (operatorList[operatorIndex] == "-") {
-            partsolution = combinedList[numberIndex] - combinedList[numberIndex+1]
-        }
-
-
-        if (operatorList[operatorIndex] == "*") {
-            partsolution = combinedList[numberIndex] * combinedList[numberIndex+1]
-        }
-
-
-        if (operatorList[operatorIndex] == "/") {
-            partsolution = combinedList[numberIndex] / combinedList[numberIndex+1]
-        }
-
 }
     fun PullToCombinedList(){
         combinedList.add(oldcombined.toFloat())

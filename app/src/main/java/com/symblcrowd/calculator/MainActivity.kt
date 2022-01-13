@@ -1,20 +1,11 @@
 package com.symblcrowd.calculator
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import com.symblcrowd.calculator.databinding.ActivityMainBinding
 import android.util.Log
-import android.view.Display
-import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,14 +37,13 @@ class MainActivity : AppCompatActivity() {
     private var numberIndex : Int = 0
     private var operatorIndex: Int = 0
     private var i : Int = 0
-    private var inputDone : Int = 0
-    private lateinit var operator : String
     private lateinit var combined : String
     private lateinit var oldcombined : String
-    private var input : Int = 0
     private var p : Int = 2
     private var c : Int = 0
-    private var modifier : Int = 0
+    private lateinit var oldtext : String
+    private lateinit var number : String
+    private var other : Float = 100F
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,48 +78,72 @@ class MainActivity : AppCompatActivity() {
 
         OneButton.setOnClickListener {
             inputList.add(1F)
+            number = "1"
+            displayInput ()
         }
         TwoButton.setOnClickListener {
             inputList.add(2F)
+            number = "2"
+            displayInput ()
         }
         ThreeButton.setOnClickListener {
             inputList.add(3F)
+            number = "3"
+            displayInput ()
         }
         FourButton.setOnClickListener {
             inputList.add(4F)
+            number = "4"
+            displayInput ()
         }
         FiveButton.setOnClickListener {
             inputList.add(5F)
+            number = "5"
+            displayInput ()
         }
         SixButton.setOnClickListener {
             inputList.add(6F)
+            number = "6"
+            displayInput ()
         }
         SevenButton.setOnClickListener {
             inputList.add(7F)
+            number = "7"
+            displayInput ()
         }
         EightButton.setOnClickListener {
             inputList.add(8F)
+            number = "8"
+            displayInput ()
         }
         NineButton.setOnClickListener {
             inputList.add(9F)
+            number = "9"
+            displayInput ()
         }
         ZeroButton.setOnClickListener {
             inputList.add(0F)
+            number = "0"
+            displayInput ()
         }
         PlusButton.setOnClickListener {
             operatorList.add("+")
+                DisplayView.text = ""
                 CombineNumbers()
         }
         MinusButton.setOnClickListener {
             operatorList.add("-")
+            DisplayView.text = ""
             CombineNumbers()
         }
         MultiplyButton.setOnClickListener {
             operatorList.add("*")
+            DisplayView.text = ""
             CombineNumbers()
         }
         DivideButton.setOnClickListener {
             operatorList.add("/")
+            DisplayView.text = ""
             CombineNumbers()
         }
         CommaButton.setOnClickListener {
@@ -147,27 +161,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         EqualButton.setOnClickListener {
-            //todo parse operatormode and button aka combinedlist[0] then operatorlist[0]
             CombineNumbers()
             ParseOperator()
-            Log.d("TAG", "CombinedList size is : " + combinedList.size)
-            Log.d("TAG", "Equasion is : " + combinedList[0] + operatorList[0] + combinedList[1])
-            DisplayView.text = solveList[0].toInt().toString()
+            // TODO this does not work if number is .01 or so
+                if (solveList[0].rem(100.toFloat()) == 0.toFloat()){
+                    DisplayView.text = solveList[0].toInt().toString()
+                }else {
+                    DisplayView.text = solveList[0].toString()
+                }
             inputList.clear()
             combinedList.clear()
             operatorList.clear()
             solveList.clear()
-
-
-
-
-
-
         }
 
     }
-
-
     fun CombineNumbers() {
         i = 0
         if (inputList.size == 1) {
@@ -198,8 +206,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun ParseOperator() {
-
-
         operatorIndex = 0
         numberIndex = 0
         i = 0
@@ -252,6 +258,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+            //TODO ask if this can be done with additional while conditions
             if (p < combinedList.size-1) {
                 p++
             }
@@ -268,13 +275,13 @@ class MainActivity : AppCompatActivity() {
         combinedList.add(oldcombined.toFloat())
     }
 
-    fun displayEquation (){
-        c=0
-       // DisplayView.text = displayList[0]
-       while (i < displayList.size-1){
-           Log.d("TAG", "Value " + c +"is" + displayList[c])
-           c++
-       }
+    fun displayInput (){
+        if (inputList.size == 1){
+            DisplayView.text = number
+        }else {
+            oldtext = DisplayView.text.toString()
+            DisplayView.text = oldtext + number
+        }
     }
 
 }

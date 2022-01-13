@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var BracesButton : Button
     private lateinit var EqualButton : Button
     private lateinit var clearButton : Button
-    private val inputList : ArrayList<Float> = arrayListOf<Float>()
-    private val combinedList : ArrayList<Float> = arrayListOf<Float>()
-    private val operatorList : MutableList<String> = arrayListOf<String>()
-    private val solveList : MutableList<Float> = arrayListOf<Float>()
-    private val displayList : MutableList<String> = arrayListOf<String>()
+    private val inputList : ArrayList<Float> = arrayListOf()
+    private val combinedList : ArrayList<Float> = arrayListOf()
+    private val operatorList : MutableList<String> = arrayListOf()
+    private val solveList : MutableList<Float> = arrayListOf()
+    private val displayList : MutableList<String> = arrayListOf()
     private var numberIndex : Int = 0
     private var operatorIndex: Int = 0
     private var i : Int = 0
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
     private var c : Int = 0
     private lateinit var oldtext : String
     private lateinit var number : String
-    private var other : Float = 100F
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,25 +53,25 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        DisplayView = findViewById<TextView>(R.id.DisplayView)
-        OneButton = findViewById<Button>(R.id.OneButton)
-        TwoButton = findViewById<Button>(R.id.TwoButton)
-        ThreeButton = findViewById<Button>(R.id.ThreeButton)
-        FourButton = findViewById<Button>(R.id.FourButton)
-        FiveButton = findViewById<Button>(R.id.FiveButton)
-        SixButton = findViewById<Button>(R.id.SixButton)
-        SevenButton = findViewById<Button>(R.id.SevenButton)
-        EightButton = findViewById<Button>(R.id.EightButton)
-        NineButton = findViewById<Button>(R.id.NineButton)
-        ZeroButton = findViewById<Button>(R.id.ZeroButton)
-        PlusButton = findViewById<Button>(R.id.PlusButton)
-        MinusButton = findViewById<Button>(R.id.MinusButton)
-        MultiplyButton = findViewById<Button>(R.id.MultiplyButton)
-        DivideButton = findViewById<Button>(R.id.DivideButton)
-        CommaButton = findViewById<Button>(R.id.CommaButton)
-        BracesButton = findViewById<Button>(R.id.BracesButton)
-        EqualButton = findViewById<Button>(R.id.EqualButton)
-        clearButton = findViewById<Button>(R.id.clearButton)
+        DisplayView = findViewById(R.id.DisplayView)
+        OneButton = findViewById(R.id.OneButton)
+        TwoButton = findViewById(R.id.TwoButton)
+        ThreeButton = findViewById(R.id.ThreeButton)
+        FourButton = findViewById(R.id.FourButton)
+        FiveButton = findViewById(R.id.FiveButton)
+        SixButton = findViewById(R.id.SixButton)
+        SevenButton = findViewById(R.id.SevenButton)
+        EightButton = findViewById(R.id.EightButton)
+        NineButton = findViewById(R.id.NineButton)
+        ZeroButton = findViewById(R.id.ZeroButton)
+        PlusButton = findViewById(R.id.PlusButton)
+        MinusButton = findViewById(R.id.MinusButton)
+        MultiplyButton = findViewById(R.id.MultiplyButton)
+        DivideButton = findViewById(R.id.DivideButton)
+        CommaButton = findViewById(R.id.CommaButton)
+        BracesButton = findViewById(R.id.BracesButton)
+        EqualButton = findViewById(R.id.EqualButton)
+        clearButton = findViewById(R.id.clearButton)
 
 
 
@@ -129,22 +128,22 @@ class MainActivity : AppCompatActivity() {
         PlusButton.setOnClickListener {
             operatorList.add("+")
                 DisplayView.text = ""
-                CombineNumbers()
+                combineNumbers()
         }
         MinusButton.setOnClickListener {
             operatorList.add("-")
             DisplayView.text = ""
-            CombineNumbers()
+            combineNumbers()
         }
         MultiplyButton.setOnClickListener {
             operatorList.add("*")
             DisplayView.text = ""
-            CombineNumbers()
+            combineNumbers()
         }
         DivideButton.setOnClickListener {
             operatorList.add("/")
             DisplayView.text = ""
-            CombineNumbers()
+            combineNumbers()
         }
         CommaButton.setOnClickListener {
             operatorList.add(",")
@@ -161,10 +160,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         EqualButton.setOnClickListener {
-            CombineNumbers()
-            ParseOperator()
+            combineNumbers()
+            parseOperator()
             // TODO this does not work if number is .01 or so
-                if (solveList[0].rem(100.toFloat()) == 0.toFloat()){
+            Log.d("INFO", "Remainder is : " + solveList[0].rem(100.toFloat()))
+                if (solveList[0].rem(100.toFloat()) == 0F){
                     DisplayView.text = solveList[0].toInt().toString()
                 }else {
                     DisplayView.text = solveList[0].toString()
@@ -176,7 +176,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun CombineNumbers() {
+    private fun combineNumbers() {
         i = 0
         if (inputList.size == 1) {
         oldcombined = inputList[0].toString()
@@ -200,12 +200,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        PullToCombinedList()
+        combinedList.add(oldcombined.toFloat())
         inputList.clear()
         displayList.add(oldcombined)
     }
 
-    fun ParseOperator() {
+    private fun parseOperator() {
         operatorIndex = 0
         numberIndex = 0
         i = 0
@@ -271,11 +271,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 }
-    fun PullToCombinedList(){
-        combinedList.add(oldcombined.toFloat())
-    }
 
-    fun displayInput (){
+    private fun displayInput (){
         if (inputList.size == 1){
             DisplayView.text = number
         }else {

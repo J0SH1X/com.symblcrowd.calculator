@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var oldcombined : String
     private var p : Int = 2
     private var c : Int = 0
-    private lateinit var oldtext : String
+    private var oldsolve : Float = 0F
     private lateinit var number : String
 
 
@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
 
         DisplayView = findViewById(R.id.DisplayView)
         OneButton = findViewById(R.id.OneButton)
@@ -126,27 +125,37 @@ class MainActivity : AppCompatActivity() {
             displayInput ()
         }
         PlusButton.setOnClickListener {
-            operatorList.add("+")
-                DisplayView.text = ""
+            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+                operatorList.add("+")
+                DisplayView.append("+")
                 combineNumbers()
+            }
+
         }
         MinusButton.setOnClickListener {
-            operatorList.add("-")
-            DisplayView.text = ""
-            combineNumbers()
+            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+                operatorList.add("-")
+                DisplayView.append("-")
+                combineNumbers()
+            }
         }
         MultiplyButton.setOnClickListener {
-            operatorList.add("*")
-            DisplayView.text = ""
-            combineNumbers()
+            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+                operatorList.add("*")
+                DisplayView.append("*")
+                combineNumbers()
+            }
         }
         DivideButton.setOnClickListener {
-            operatorList.add("/")
-            DisplayView.text = ""
-            combineNumbers()
+            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+                operatorList.add("/")
+                DisplayView.append("/")
+                combineNumbers()
+            }
         }
         CommaButton.setOnClickListener {
-            operatorList.add(",")
+            operatorList.add(".")
+            DisplayView.append(",")
         }
         BracesButton.setOnClickListener {
             operatorList.add("()")
@@ -156,22 +165,24 @@ class MainActivity : AppCompatActivity() {
             combinedList.clear()
             operatorList.clear()
             solveList.clear()
+            oldsolve = 0F
             DisplayView.text = ""
         }
 
         EqualButton.setOnClickListener {
             combineNumbers()
             parseOperator()
-            // TODO this does not work if number is .01 or so
+            // TODO this does not work
             Log.d("INFO", "Remainder is : " + solveList[0].rem(100.toFloat()))
-                if (solveList[0].rem(100.toFloat()) == 0F){
-                    DisplayView.text = solveList[0].toInt().toString()
-                }else {
-                    DisplayView.text = solveList[0].toString()
-                }
+            if (solveList[0].rem(100.toFloat()) == 0F){
+                DisplayView.text = solveList[0].toInt().toString()
+            }else {
+                DisplayView.text = solveList[0].toString()
+            }
             inputList.clear()
             combinedList.clear()
             operatorList.clear()
+            oldsolve = solveList[0]
             solveList.clear()
         }
 
@@ -179,7 +190,14 @@ class MainActivity : AppCompatActivity() {
     private fun combineNumbers() {
         i = 0
         if (inputList.size == 1) {
-        oldcombined = inputList[0].toString()
+            if (oldsolve == 0F) {
+                oldcombined = inputList[0].toString()
+            }else {
+                combinedList.clear()
+                combinedList.add(oldsolve)
+                oldcombined = inputList[0].toString()
+                combinedList.add(oldcombined.toFloat())
+            }
         }else {
             while (i < inputList.size - 1) {
                 if (i == 0) {
@@ -200,7 +218,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        combinedList.add(oldcombined.toFloat())
+        if (oldsolve == 0F) {
+            combinedList.add(oldcombined.toFloat())
+        }else {
+            combinedList.clear()
+            combinedList.add(oldsolve)
+            combinedList.add(oldcombined.toFloat())
+        }
         inputList.clear()
         displayList.add(oldcombined)
     }
@@ -217,10 +241,10 @@ class MainActivity : AppCompatActivity() {
                     if (i == 0) {
                         solveList.add(combinedList[numberIndex + c] + combinedList[numberIndex + p])
                     }else {
-                            solveList.set(
-                                0,
-                                (solveList[0] + combinedList[numberIndex + c + 1])
-                            )
+                        solveList.set(
+                            0,
+                            (solveList[0] + combinedList[numberIndex + c + 1])
+                        )
                     }
                 }
                 operatorList[operatorIndex] == "-" -> {
@@ -258,11 +282,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-            //TODO ask if this can be done with additional while conditions
             if (p < combinedList.size-1) {
                 p++
             }
-                i++
+            i++
             if ( operatorIndex < operatorList.size-1) {
                 operatorIndex++
             }
@@ -270,14 +293,14 @@ class MainActivity : AppCompatActivity() {
                 c++
             }
         }
-}
+        operatorIndex = 0
+    }
 
-    private fun displayInput (){
-        if (inputList.size == 1){
+    private fun displayInput () {
+        if ( inputList.size == 0){
             DisplayView.text = number
         }else {
-            oldtext = DisplayView.text.toString()
-            DisplayView.text = oldtext + number
+            DisplayView.append(number)
         }
     }
 

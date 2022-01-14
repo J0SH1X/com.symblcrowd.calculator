@@ -1827,6 +1827,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id bannerView
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -1875,6 +1876,7 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id delButton
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -2144,7 +2146,6 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
-id toolbar
 id top
 id topPanel
 id touch_outside

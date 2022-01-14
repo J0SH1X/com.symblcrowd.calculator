@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -82,10 +81,13 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ConstraintLayout appBarLayout;
 
   @NonNull
+  public final TextView bannerView;
+
+  @NonNull
   public final Button clearButton;
 
   @NonNull
-  public final Toolbar toolbar;
+  public final Button delButton;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull Button BracesButton,
       @NonNull Button CommaButton, @NonNull TextView DisplayView, @NonNull Button DivideButton,
@@ -94,8 +96,8 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull Button NineButton, @NonNull Button OneButton, @NonNull Button PlusButton,
       @NonNull Button SevenButton, @NonNull Button SixButton, @NonNull Button ThreeButton,
       @NonNull Button TwoButton, @NonNull ConstraintLayout WasIstDas, @NonNull Button ZeroButton,
-      @NonNull ConstraintLayout appBarLayout, @NonNull Button clearButton,
-      @NonNull Toolbar toolbar) {
+      @NonNull ConstraintLayout appBarLayout, @NonNull TextView bannerView,
+      @NonNull Button clearButton, @NonNull Button delButton) {
     this.rootView = rootView;
     this.BracesButton = BracesButton;
     this.CommaButton = CommaButton;
@@ -117,8 +119,9 @@ public final class ActivityMainBinding implements ViewBinding {
     this.WasIstDas = WasIstDas;
     this.ZeroButton = ZeroButton;
     this.appBarLayout = appBarLayout;
+    this.bannerView = bannerView;
     this.clearButton = clearButton;
-    this.toolbar = toolbar;
+    this.delButton = delButton;
   }
 
   @Override
@@ -264,22 +267,28 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.bannerView;
+      TextView bannerView = ViewBindings.findChildViewById(rootView, id);
+      if (bannerView == null) {
+        break missingId;
+      }
+
       id = R.id.clearButton;
       Button clearButton = ViewBindings.findChildViewById(rootView, id);
       if (clearButton == null) {
         break missingId;
       }
 
-      id = R.id.toolbar;
-      Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
-      if (toolbar == null) {
+      id = R.id.delButton;
+      Button delButton = ViewBindings.findChildViewById(rootView, id);
+      if (delButton == null) {
         break missingId;
       }
 
       return new ActivityMainBinding((ConstraintLayout) rootView, BracesButton, CommaButton,
           DisplayView, DivideButton, EightButton, EqualButton, FiveButton, FourButton, MinusButton,
           MultiplyButton, NineButton, OneButton, PlusButton, SevenButton, SixButton, ThreeButton,
-          TwoButton, WasIstDas, ZeroButton, appBarLayout, clearButton, toolbar);
+          TwoButton, WasIstDas, ZeroButton, appBarLayout, bannerView, clearButton, delButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

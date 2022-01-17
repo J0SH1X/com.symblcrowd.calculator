@@ -29,11 +29,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var BracesButton : Button
     private lateinit var EqualButton : Button
     private lateinit var clearButton : Button
-    private val inputList : ArrayList<Float> = arrayListOf()
+    private val inputList : ArrayList<String> = arrayListOf()
     private val combinedList : ArrayList<Float> = arrayListOf()
     private val operatorList : MutableList<String> = arrayListOf()
     private val solveList : MutableList<Float> = arrayListOf()
-    private val displayList : MutableList<String> = arrayListOf()
+    private var oldsolve : MutableList<Float> = arrayListOf()
     private var numberIndex : Int = 0
     private var operatorIndex: Int = 0
     private var i : Int = 0
@@ -41,8 +41,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var oldcombined : String
     private var p : Int = 2
     private var c : Int = 0
-    private var oldsolve : Float = 0F
     private lateinit var number : String
+    private var clearButtonPressed : Int = 0
+    private var isPointNumber = false
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,57 +77,57 @@ class MainActivity : AppCompatActivity() {
 
 
         OneButton.setOnClickListener {
-            inputList.add(1F)
+            inputList.add("1")
             number = "1"
             displayInput ()
         }
         TwoButton.setOnClickListener {
-            inputList.add(2F)
+            inputList.add("2")
             number = "2"
             displayInput ()
         }
         ThreeButton.setOnClickListener {
-            inputList.add(3F)
+            inputList.add("3")
             number = "3"
             displayInput ()
         }
         FourButton.setOnClickListener {
-            inputList.add(4F)
+            inputList.add("4")
             number = "4"
             displayInput ()
         }
         FiveButton.setOnClickListener {
-            inputList.add(5F)
+            inputList.add("5")
             number = "5"
             displayInput ()
         }
         SixButton.setOnClickListener {
-            inputList.add(6F)
+            inputList.add("6")
             number = "6"
             displayInput ()
         }
         SevenButton.setOnClickListener {
-            inputList.add(7F)
+            inputList.add("7")
             number = "7"
             displayInput ()
         }
         EightButton.setOnClickListener {
-            inputList.add(8F)
+            inputList.add("8")
             number = "8"
             displayInput ()
         }
         NineButton.setOnClickListener {
-            inputList.add(9F)
+            inputList.add("9")
             number = "9"
             displayInput ()
         }
         ZeroButton.setOnClickListener {
-            inputList.add(0F)
+            inputList.add("0")
             number = "0"
             displayInput ()
         }
         PlusButton.setOnClickListener {
-            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+            if (inputList.size > 0 || (oldsolve.isNotEmpty() && operatorList.size == 0)) {
                 operatorList.add("+")
                 DisplayView.append("+")
                 combineNumbers()
@@ -133,29 +135,32 @@ class MainActivity : AppCompatActivity() {
 
         }
         MinusButton.setOnClickListener {
-            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+            if (inputList.size > 0 || (oldsolve.isNotEmpty() && operatorList.size == 0)) {
                 operatorList.add("-")
                 DisplayView.append("-")
                 combineNumbers()
             }
         }
         MultiplyButton.setOnClickListener {
-            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+            if (inputList.size > 0 || (oldsolve.isNotEmpty() && operatorList.size == 0)) {
                 operatorList.add("*")
                 DisplayView.append("*")
                 combineNumbers()
             }
         }
         DivideButton.setOnClickListener {
-            if (inputList.size > 0 || (oldsolve != 0F && operatorList.size == 0)) {
+            if (inputList.size > 0 || (oldsolve.isNotEmpty() && operatorList.size == 0)) {
                 operatorList.add("/")
                 DisplayView.append("/")
                 combineNumbers()
             }
         }
         CommaButton.setOnClickListener {
-            operatorList.add(".")
-            DisplayView.append(",")
+            if (inputList[inputList.lastIndex] != "." && inputList.isNotEmpty()) {
+                inputList.add(".")
+                DisplayView.append(",")
+                isPointNumber = true
+            }
         }
         BracesButton.setOnClickListener {
             operatorList.add("()")
@@ -165,8 +170,11 @@ class MainActivity : AppCompatActivity() {
             combinedList.clear()
             operatorList.clear()
             solveList.clear()
-            oldsolve = 0F
+            oldsolve.clear()
             DisplayView.text = ""
+            clearButtonPressed = 1
+            p = 1
+            isPointNumber = false
         }
 
         EqualButton.setOnClickListener {
@@ -174,15 +182,19 @@ class MainActivity : AppCompatActivity() {
             parseOperator()
             // TODO this does not work
             Log.d("INFO", "Remainder is : " + solveList[0].rem(100.toFloat()))
-            if (solveList[0].rem(100.toFloat()) == 0F){
+            if (solveList[0].rem(100.toFloat()) == 0F) {
                 DisplayView.text = solveList[0].toInt().toString()
-            }else {
+            } else {
                 DisplayView.text = solveList[0].toString()
             }
             inputList.clear()
             combinedList.clear()
             operatorList.clear()
-            oldsolve = solveList[0]
+            if (oldsolve.size == 0) {
+                oldsolve.add(solveList[0])
+            } else{
+                oldsolve[0] = solveList[0]
+        }
             solveList.clear()
         }
 
@@ -190,26 +202,42 @@ class MainActivity : AppCompatActivity() {
     private fun combineNumbers() {
         i = 0
         if (inputList.size == 1) {
-            if (oldsolve == 0F) {
-                oldcombined = inputList[0].toString()
+            if (oldsolve.size == 0) {
+                oldcombined = inputList[0]
             }else {
                 combinedList.clear()
-                combinedList.add(oldsolve)
-                oldcombined = inputList[0].toString()
+                combinedList.add(oldsolve[0])
+                oldcombined = inputList[0]
                 combinedList.add(oldcombined.toFloat())
             }
         }else {
-            while (i < inputList.size - 1) {
+            if (inputList.contains(".") && p < inputList.size-1 && operatorList.size == 0 || isPointNumber == true && p < inputList.size-1) {
+                p++
+                }
+            if (p == inputList.size){
+                p--
+            }
+            while (i < inputList.size -1) {
                 if (i == 0) {
                     combined =
-                        inputList[numberIndex].toInt()
-                            .toString() + inputList[numberIndex + 1].toInt()
-                            .toString()
+                        inputList[numberIndex] + inputList[numberIndex + 1]
                     oldcombined = combined
                     i++
 
                 } else {
-                    combined = oldcombined + inputList[numberIndex + p].toInt().toString()
+
+
+                   /* if ((inputList.size >0 && isPointNumber == false) || clearButtonPressed == 0 && isPointNumber == false) {
+                        p = 2
+                        combined = oldcombined + inputList[numberIndex + p]
+                    }else if( (inputList.size > 0 && isPointNumber == true) || clearButtonPressed == 1){
+                        combined = oldcombined + inputList[numberIndex + p +1]
+                        clearButtonPressed = 0
+                    }*/
+
+                    combined = oldcombined + inputList[numberIndex + p]
+
+
                     oldcombined = combined
                     i++
                     if (p < inputList.size - 1) {
@@ -218,15 +246,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        if (oldsolve == 0F) {
+        if (oldsolve.size == 0) {
             combinedList.add(oldcombined.toFloat())
         }else {
             combinedList.clear()
-            combinedList.add(oldsolve)
+            combinedList.add(oldsolve[0])
             combinedList.add(oldcombined.toFloat())
         }
         inputList.clear()
-        displayList.add(oldcombined)
     }
 
     private fun parseOperator() {
@@ -241,20 +268,14 @@ class MainActivity : AppCompatActivity() {
                     if (i == 0) {
                         solveList.add(combinedList[numberIndex + c] + combinedList[numberIndex + p])
                     }else {
-                        solveList.set(
-                            0,
-                            (solveList[0] + combinedList[numberIndex + c + 1])
-                        )
+                        solveList[0] = (solveList[0] + combinedList[numberIndex + c + 1])
                     }
                 }
                 operatorList[operatorIndex] == "-" -> {
                     if (i == 0) {
                         solveList.add(combinedList[numberIndex + c] - combinedList[numberIndex + p])
                     }else {
-                        solveList.set(
-                            0,
-                            (solveList[0] - combinedList[numberIndex + c + 1])
-                        )
+                        solveList[0] = (solveList[0] - combinedList[numberIndex + c + 1])
 
                     }
 
@@ -263,10 +284,7 @@ class MainActivity : AppCompatActivity() {
                     if (i == 0) {
                         solveList.add(combinedList[numberIndex + c] * combinedList[numberIndex + p])
                     }else {
-                        solveList.set(
-                            0,
-                            (solveList[0] * combinedList[numberIndex + c + 1])
-                        )
+                        solveList[0] = (solveList[0] * combinedList[numberIndex + c + 1])
 
                     }
                 }
@@ -274,10 +292,7 @@ class MainActivity : AppCompatActivity() {
                     if (i == 0) {
                         solveList.add(combinedList[numberIndex + c] / combinedList[numberIndex + p])
                     }else {
-                        solveList.set(
-                            0,
-                            (solveList[0] / combinedList[numberIndex + c + 1])
-                        )
+                        solveList[0] = (solveList[0] / combinedList[numberIndex + c + 1])
 
                     }
                 }
@@ -293,7 +308,6 @@ class MainActivity : AppCompatActivity() {
                 c++
             }
         }
-        operatorIndex = 0
     }
 
     private fun displayInput () {

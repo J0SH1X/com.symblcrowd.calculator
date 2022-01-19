@@ -127,46 +127,26 @@ class MainActivity : AppCompatActivity() {
         }
         PlusButton.setOnClickListener {
             operatorList.add("+")
-            DisplayView.append("+")
-            if (solveList.size == 1){
-                oldcombined = solveList[0].toString()
+                DisplayView.text = ""
                 combineNumbers()
-            }else {
-                combineNumbers()
-            }
         }
         MinusButton.setOnClickListener {
             operatorList.add("-")
-            DisplayView.append("-")
-            if (solveList.size == 1){
-                oldcombined = solveList[0].toString()
-                combineNumbers()
-            }else {
-                combineNumbers()
-            }
+            DisplayView.text = ""
+            combineNumbers()
         }
         MultiplyButton.setOnClickListener {
             operatorList.add("*")
-            DisplayView.append("*")
-            if (solveList.size == 1){
-                oldcombined = solveList[0].toString()
-                combineNumbers()
-            }else {
-                combineNumbers()
-            }
+            DisplayView.text = ""
+            combineNumbers()
         }
         DivideButton.setOnClickListener {
             operatorList.add("/")
-            DisplayView.append("/")
-            if (solveList.size == 1){
-                oldcombined = solveList[0].toString()
-            }else {
-                combineNumbers()
-            }
+            DisplayView.text = ""
+            combineNumbers()
         }
         CommaButton.setOnClickListener {
             operatorList.add(",")
-            DisplayView.append(",")
         }
         BracesButton.setOnClickListener {
             operatorList.add("()")
@@ -182,7 +162,7 @@ class MainActivity : AppCompatActivity() {
         EqualButton.setOnClickListener {
             combineNumbers()
             parseOperator()
-            // TODO this does not work
+            // TODO this does not work if number is .01 or so
             Log.d("INFO", "Remainder is : " + solveList[0].rem(100.toFloat()))
                 if (solveList[0].rem(100.toFloat()) == 0F){
                     DisplayView.text = solveList[0].toInt().toString()
@@ -199,7 +179,6 @@ class MainActivity : AppCompatActivity() {
     private fun combineNumbers() {
         i = 0
         if (inputList.size == 1) {
-            //the feature asked for doesnt work cause oldcombined is overriden here
         oldcombined = inputList[0].toString()
         }else {
             while (i < inputList.size - 1) {
@@ -279,6 +258,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+            //TODO ask if this can be done with additional while conditions
             if (p < combinedList.size-1) {
                 p++
             }
@@ -290,14 +270,14 @@ class MainActivity : AppCompatActivity() {
                 c++
             }
         }
-        operatorIndex = 0
 }
 
-    private fun displayInput () {
-        if ( inputList.size == 0){
+    private fun displayInput (){
+        if (inputList.size == 1){
             DisplayView.text = number
         }else {
-            DisplayView.append(number)
+            oldtext = DisplayView.text.toString()
+            DisplayView.text = oldtext + number
         }
     }
 

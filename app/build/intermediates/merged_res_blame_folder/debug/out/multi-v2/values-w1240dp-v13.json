@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w1240dp-v13/values-w1240dp-v13.xml",
+            "outputFile": "/Users/praktikum/AndroidStudioProjects/com.symblcrowd.calculator/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w1240dp-v13/values-w1240dp-v13.xml",
             "map": [
                 {
-                    "source": "/home/j0sh1x/StudioProjects/com.symblcrowd.calculator/app/src/main/res/values-w1240dp/dimens.xml",
+                    "source": "/Users/praktikum/AndroidStudioProjects/com.symblcrowd.calculator/app/src/main/res/values-w1240dp/dimens.xml",
                     "from": {
                         "startLines": "1",
                         "startColumns": "4",

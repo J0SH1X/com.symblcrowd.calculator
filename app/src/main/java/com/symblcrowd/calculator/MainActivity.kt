@@ -1,11 +1,18 @@
 package com.symblcrowd.calculator
 
+import android.os.Build
 import android.os.Bundle
+import android.os.StrictMode
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import com.symblcrowd.calculator.databinding.ActivityMainBinding
 import android.util.Log
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import android.os.StrictMode.ThreadPolicy
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,10 +55,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (Build.VERSION.SDK_INT > 9) {
+            val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
 
         DisplayView = findViewById(R.id.DisplayView)
         OneButton = findViewById(R.id.OneButton)
@@ -172,6 +183,7 @@ class MainActivity : AppCompatActivity() {
             inputList.clear()
             combinedList.clear()
             operatorList.clear()
+            postRequest()
             solveList.clear()
         }
 
@@ -279,6 +291,20 @@ class MainActivity : AppCompatActivity() {
             oldtext = DisplayView.text.toString()
             DisplayView.text = oldtext + number
         }
+    }
+
+    private fun postRequest(){
+        val client = OkHttpClient()
+
+        val mediaType = "application/json".toMediaTypeOrNull()
+        val body = RequestBody.create(mediaType, "{\n\t\"text\" :" + solveList[0] + "\n}")
+        val request = Request.Builder()
+            .url("http://hellnet.dnshome.de/add.php")
+            .post(body)
+            .addHeader("Content-Type", "application/json")
+            .build()
+
+        val response = client.newCall(request).execute()
     }
 
 }
